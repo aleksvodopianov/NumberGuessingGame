@@ -1,0 +1,22 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksvodopianov/NumberGuessingGame.git"
+  },
+  "author": "Aleks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksvodopianov/NumberGuessingGame/issues"
+  },
+  "homepage": "https://github.com/aleksvodopianov/NumberGuessingGame#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
