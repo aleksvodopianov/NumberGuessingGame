@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/aleksvodopianov/NumberGuessingGame#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.14",
     "gulp": "^4.0.2"
   }
 }
