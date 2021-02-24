@@ -1,3 +1,4 @@
+const fileinclude = require('gulp-file-include');
 
 let projectFolder = "dist";
 let sourceFolder = "src";
@@ -11,7 +12,7 @@ let path = {
         fonts: projectFolder + "/fonts/",
     },
     src: {
-        html: sourceFolder + "/*.html",
+        html: [sourceFolder + "/*.html", "!" + sourceFolder + "/_*.html"],
         css: sourceFolder + "/sass/all.scss",
         js: sourceFolder + "/js/script.js",
         img: sourceFolder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
@@ -27,7 +28,10 @@ let path = {
 };
 let { src, dest } = require('gulp'),
     gulp = require('gulp'),
-    browsersync = require('browser-sync').create();
+    browsersync = require('browser-sync').create(),
+    fileInclude = require("gulp-file-include"),
+    del = require('del'),
+    scss = require('gulp-sass');
 
 function browserSync(params) {
     browsersync.init({
@@ -41,13 +45,34 @@ function browserSync(params) {
 
 function html() {
     return src(path.src.html)
+        .pipe(fileInclude())
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream());
 }
 
-let build = gulp.series(html);
-let watch = gulp.parallel(build, browserSync);
+function css() {
+    return src(path.src.css)
+        .pipe(
+            scss({
+                outputStyle: "expanded"
+            })
+        )
+        .pipe(dest(path.build.css))
+        .pipe(browsersync.stream());
+}
 
+function watchFiles(params) {
+    gulp.watch([path.watch.html], html);
+}
+
+function clean(params) {
+    return del(path.clean);
+}
+
+let build = gulp.series(clean, gulp.parallel(css, html));
+let watch = gulp.parallel(build, watchFiles, browserSync);
+
+exports.css = css;
 exports.html = html;
 exports.build = build;
 exports.watch = watch;
