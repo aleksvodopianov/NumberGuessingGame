@@ -3,3 +3,21 @@ header {
 	display:block;
 	position:relative;
 }
+span {
+	font-size: 20px;
+	@media (max-width: 767px) {
+		font-size: 40px;
+	}
+}
+div {
+	font-size: 20px;
+	@media (max-width: 767px) {
+		font-size: 40px;
+	}
+}
+p {
+	font-size: 20px;
+	@media (max-width: 767px) {
+		font-size: 40px;
+	}
+}
