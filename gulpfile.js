@@ -1,4 +1,4 @@
-const fileinclude = require('gulp-file-include');
+//const fileInclude = require('gulp-file-include');
 
 let projectFolder = "dist";
 let sourceFolder = "src";
@@ -15,14 +15,14 @@ let path = {
         html: [sourceFolder + "/*.html", "!" + sourceFolder + "/_*.html"],
         css: [sourceFolder + "/sass/style.scss", "!" + sourceFolder + "/_*.scss"],
         js: sourceFolder + "/js/script.js",
-        img: sourceFolder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
+        img: sourceFolder + "/img/**/*.{jpg, png, svg, gif, ico, webp} ",
         fonts: sourceFolder + "/fonts/*.ttf",
     },
     watch: {
         html: sourceFolder + "/**/*.html",
         css: sourceFolder + "/sass/**/*.scss",
         js: sourceFolder + "/js/**/*.js",
-        img: sourceFolder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
+        img: sourceFolder + "/img/**/*.{jpg, png, svg, gif, ico, webp} ",
     },
     clean: "./" + projectFolder + "/"
 };
@@ -35,7 +35,11 @@ let { src, dest } = require('gulp'),
     autoPrefixer = require('gulp-autoprefixer'),
     groupMedia = require('gulp-group-css-media-queries'),
     cleanCss = require('gulp-clean-css'),
-    renameCss = require('gulp-rename');
+    renameFile = require('gulp-rename'),
+    uglify = require('gulp-uglify-es').default,
+    imagemin = require('gulp-imagemin'),
+    webp = require('gulp-webp'),
+    babel = require('gulp-babel');
 
 function browserSync(params) {
     browsersync.init({
@@ -73,7 +77,7 @@ function css() {
         .pipe(dest(path.build.css))
         .pipe(cleanCss())
         .pipe(
-            renameCss({
+            renameFile({
                 extname: ".min.css"
             })
         )
@@ -81,18 +85,64 @@ function css() {
         .pipe(browsersync.stream());
 }
 
+function js() {
+    return src(path.src.js)
+        .pipe(fileInclude())
+        .pipe(dest(path.build.js))
+        .pipe(
+            uglify()
+        )
+        .pipe(
+            renameFile({
+                extname: ".min.js"
+            })
+        )
+        .pipe(
+            babel()
+        )
+        .pipe(dest(path.build.js))
+        .pipe(browsersync.stream());
+}
+
+function images() {
+    return src(path.src.img)
+        .pipe(
+            webp({
+                quality: 70
+            })
+        )
+        .pipe(dest(path.build.img))
+        .pipe(src(path.src.img))
+        .pipe(imagemin({
+            interlaced: true,
+            progressive: true,
+            optimizationLevel: 3,
+            svgoPlugins: [
+                {
+                    removeViewBox: false
+                }
+            ]
+        }))
+        .pipe(dest(path.build.img))
+        .pipe(browsersync.stream());
+}
+
 function watchFiles(params) {
     gulp.watch([path.watch.html], html);
     gulp.watch([path.watch.css], css);
+    gulp.watch([path.watch.js], js);
+    gulp.watch([path.watch.img], images);
 }
 
 function clean(params) {
     return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(css, html));
+let build = gulp.series(clean, gulp.parallel(js, css, html, images));
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.images = images;
+exports.js = js;
 exports.css = css;
 exports.html = html;
 exports.build = build;
