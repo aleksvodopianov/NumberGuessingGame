@@ -1,35 +1,38 @@
 //const fileInclude = require('gulp-file-include');
 
-let projectFolder = "dist";
-let sourceFolder = "src";
+let projectFolder = 'dist';
+let sourceFolder = 'src';
 
 let path = {
     build: {
-        html: projectFolder + "/",
-        css: projectFolder + "/css/",
-        js: projectFolder + "/js/",
-        img: projectFolder + "/img/",
-        fonts: projectFolder + "/fonts/",
+        html: projectFolder + '/',
+        css: projectFolder + '/css/',
+        js: projectFolder + '/js/',
+        img: projectFolder + '/img/',
+        fonts: projectFolder + '/fonts/',
     },
     src: {
-        html: [sourceFolder + "/*.html", "!" + sourceFolder + "/_*.html"],
-        css: [sourceFolder + "/sass/style.scss", "!" + sourceFolder + "/_*.scss"],
-        js: sourceFolder + "/js/script.js",
-        img: sourceFolder + "/img/**/*.{jpg, png, svg, gif, ico, webp} ",
-        fonts: sourceFolder + "/fonts/*.ttf",
+        html: [sourceFolder + '/*.html', '!' + sourceFolder + '/_*.html'],
+        css: [
+            sourceFolder + '/sass/style.scss',
+            '!' + sourceFolder + '/_*.scss',
+        ],
+        js: sourceFolder + '/js/script.js',
+        img: sourceFolder + '/img/**/*.{jpg, png, svg, gif, ico, webp} ',
+        fonts: sourceFolder + '/fonts/*.ttf',
     },
     watch: {
-        html: sourceFolder + "/**/*.html",
-        css: sourceFolder + "/sass/**/*.scss",
-        js: sourceFolder + "/js/**/*.js",
-        img: sourceFolder + "/img/**/*.{jpg, png, svg, gif, ico, webp} ",
+        html: sourceFolder + '/**/*.html',
+        css: sourceFolder + '/sass/**/*.scss',
+        js: sourceFolder + '/js/**/*.js',
+        img: sourceFolder + '/img/**/*.{jpg, png, svg, gif, ico, webp} ',
     },
-    clean: "./" + projectFolder + "/"
+    clean: './' + projectFolder + '/',
 };
 let { src, dest } = require('gulp'),
     gulp = require('gulp'),
     browsersync = require('browser-sync').create(),
-    fileInclude = require("gulp-file-include"),
+    fileInclude = require('gulp-file-include'),
     del = require('del'),
     scss = require('gulp-sass'),
     autoPrefixer = require('gulp-autoprefixer'),
@@ -39,12 +42,14 @@ let { src, dest } = require('gulp'),
     uglify = require('gulp-uglify-es').default,
     imagemin = require('gulp-imagemin'),
     webp = require('gulp-webp'),
-    babel = require('gulp-babel');
+    babel = require('gulp-babel'),
+    webpHtml = require('gulp-webp-html'),
+    prettify = require('gulp-html-prettify');
 
 function browserSync(params) {
     browsersync.init({
         server: {
-            baseDir: "./" + projectFolder + "/"
+            baseDir: './' + projectFolder + '/',
         },
         port: 3000,
         notify: false,
@@ -54,6 +59,8 @@ function browserSync(params) {
 function html() {
     return src(path.src.html)
         .pipe(fileInclude())
+        .pipe(webpHtml())
+        .pipe(prettify({ indent_char: ' ', indent_size: 4 }))
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream());
 }
@@ -62,24 +69,22 @@ function css() {
     return src(path.src.css)
         .pipe(
             scss({
-                outputStyle: "expanded"
-            })
+                outputStyle: 'expanded',
+            }),
         )
-        .pipe(
-            groupMedia()
-        )
+        .pipe(groupMedia())
         .pipe(
             autoPrefixer({
-                overrideBrowserslist: ["last 5 versions"],
-                cascade: true
-            })
+                overrideBrowserslist: ['last 5 versions'],
+                cascade: true,
+            }),
         )
         .pipe(dest(path.build.css))
         .pipe(cleanCss())
         .pipe(
             renameFile({
-                extname: ".min.css"
-            })
+                extname: '.min.css',
+            }),
         )
         .pipe(dest(path.build.css))
         .pipe(browsersync.stream());
@@ -89,17 +94,13 @@ function js() {
     return src(path.src.js)
         .pipe(fileInclude())
         .pipe(dest(path.build.js))
-        .pipe(
-            uglify()
-        )
+        .pipe(uglify())
         .pipe(
             renameFile({
-                extname: ".min.js"
-            })
+                extname: '.min.js',
+            }),
         )
-        .pipe(
-            babel()
-        )
+        .pipe(babel())
         .pipe(dest(path.build.js))
         .pipe(browsersync.stream());
 }
@@ -108,21 +109,23 @@ function images() {
     return src(path.src.img)
         .pipe(
             webp({
-                quality: 70
-            })
+                quality: 70,
+            }),
         )
         .pipe(dest(path.build.img))
         .pipe(src(path.src.img))
-        .pipe(imagemin({
-            interlaced: true,
-            progressive: true,
-            optimizationLevel: 3,
-            svgoPlugins: [
-                {
-                    removeViewBox: false
-                }
-            ]
-        }))
+        .pipe(
+            imagemin({
+                interlaced: true,
+                progressive: true,
+                optimizationLevel: 3,
+                svgoPlugins: [
+                    {
+                        removeViewBox: false,
+                    },
+                ],
+            }),
+        )
         .pipe(dest(path.build.img))
         .pipe(browsersync.stream());
 }
