@@ -18,14 +18,14 @@ let path = {
             '!' + sourceFolder + '/_*.scss',
         ],
         js: sourceFolder + '/js/script.js',
-        img: sourceFolder + '/img/**/*.{jpg, png, svg, gif, ico, webp} ',
+        img: sourceFolder + '/img/**/*.+(png|jpg|gif|ico|svg|webp) ',
         fonts: sourceFolder + '/fonts/*.ttf',
     },
     watch: {
         html: sourceFolder + '/**/*.html',
         css: sourceFolder + '/sass/**/*.scss',
         js: sourceFolder + '/js/**/*.js',
-        img: sourceFolder + '/img/**/*.{jpg, png, svg, gif, ico, webp} ',
+        img: sourceFolder + '/img/**/*.+(png|jpg|gif|ico|svg|webp) ',
     },
     clean: './' + projectFolder + '/',
 };
@@ -44,7 +44,8 @@ let { src, dest } = require('gulp'),
     webp = require('gulp-webp'),
     babel = require('gulp-babel'),
     webpHtml = require('gulp-webp-html'),
-    prettify = require('gulp-html-prettify');
+    prettify = require('gulp-html-prettify'),
+    webpcss = require('gulp-webpcss');
 
 function browserSync(params) {
     browsersync.init({
@@ -79,6 +80,7 @@ function css() {
                 cascade: true,
             }),
         )
+        .pipe(webpcss({ webpClass: '.webp', noWebpClass: '.no-webp' }))
         .pipe(dest(path.build.css))
         .pipe(cleanCss())
         .pipe(

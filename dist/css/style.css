@@ -276,9 +276,14 @@ header {
   position: relative;
 }
 
+.no-webp div {
+  background: url("img/aleks.jpg") 0 0 no-repeat; }
+
 footer {
   display: block;
   width: 100%;
   margin: 0 0 0;
   padding: 0 0 0;
 }
+
+.webp div { background: url(img/aleks.webp) 0 0 no-repeat; }
