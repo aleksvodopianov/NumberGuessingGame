@@ -270,13 +270,37 @@ aside {
   position: relative;
 }
 
+@font-face {
+  font-family: "Roboto-Regular";
+  font-display: swap;
+  src: url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto-Thin";
+  font-display: swap;
+  src: url("../fonts/Roboto-Thin.woff") format("woff"), url("../fonts/Roboto-Thin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto-ThinItalic";
+  font-display: swap;
+  src: url("../fonts/Roboto-ThinItalic.woff") format("woff"), url("../fonts/Roboto-ThinItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
 header {
   width: 100%;
   display: block;
   position: relative;
 }
 
-.no-webp div {
+.no-webp img {
   background: url("img/aleks.jpg") 0 0 no-repeat; }
 
 footer {
@@ -286,4 +310,4 @@ footer {
   padding: 0 0 0;
 }
 
-.webp div { background: url(img/aleks.webp) 0 0 no-repeat; }
+.webp img { background: url(img/aleks.webp) 0 0 no-repeat; }
