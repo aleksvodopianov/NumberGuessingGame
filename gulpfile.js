@@ -147,7 +147,7 @@ function fonts(params) {
         .pipe(dest(path.build.fonts));
 }
 
-// Next task genereted otf-files to ttf-files on folder "src" on terminal command "gulp otf2ttf" ******************************
+// Next task genereted otf-files to ttf-files on folder "src" on terminal command "gulp otf2ttf" ***********************************************************
 gulp.task('otf2ttf', function () {
     return src([sourceFolder = '/fonts/*.otf'])
         .pipe(fonter({
@@ -156,14 +156,14 @@ gulp.task('otf2ttf', function () {
         .pipe(dest(sourceFolder + '/fonts/'));
 });
 
-// Next task genereted svgsprite on terminal command "gulp svgSprite" *********************************************************
+// Next task genereted svgsprite on terminal command "gulp svgSprite" **************************************************************************************
 gulp.task('svgSprite', function () {
     return gulp.src([sourceFolder + '/iconsprite/*.svg'])
         .pipe(svgSprite({
             mode: {
                 stack: {
                     sprite: '../icons/icons.svg',
-                    example: true // creates html-file with examples of icons (if it's necessary)
+                    example: true // creates html-file with examples of icons (if it's necessary) **********************************************************
                 }
             },
         }
