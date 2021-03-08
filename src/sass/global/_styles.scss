@@ -4,6 +4,7 @@
 	position:relative;
 	width:100%;
 	min-height: 100%;
+	font-family: "Roboto-Regular";
 }
 .layout {
 	display: flex;
@@ -15,7 +16,7 @@
 main {
 	display:block;
 	width:100%;
-	min-height: 88vh;
+	min-height: 86vh;
 	position: relative;
 	color: $font-color-dark;
 }
@@ -32,6 +33,7 @@ main {
 	padding-bottom: 90px;
 	margin-top: 20vh;
 	margin-bottom: 20vh;
+	text-align: center;
 }
 #sidebar {
 	position: relative;

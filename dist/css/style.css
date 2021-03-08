@@ -245,6 +245,7 @@ footer {
   position: relative;
   width: 100%;
   min-height: 100%;
+  font-family: "Roboto-Regular";
 }
 
 .layout {
@@ -262,7 +263,7 @@ footer {
 main {
   display: block;
   width: 100%;
-  min-height: 88vh;
+  min-height: 86vh;
   position: relative;
   color: #212529;
 }
@@ -287,6 +288,7 @@ main {
   padding-bottom: 90px;
   margin-top: 20vh;
   margin-bottom: 20vh;
+  text-align: center;
 }
 
 #sidebar {
@@ -356,6 +358,7 @@ footer p {
 .layout .lastResult {
   color: white;
   padding: 3px;
+  margin: 5px 0;
 }
 
 .layout .guessField {
@@ -364,4 +367,8 @@ footer p {
 
 .layout .content_description {
   margin-bottom: 25px;
+}
+
+.layout .guesses {
+  margin-top: 10px;
 }
