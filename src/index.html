@@ -13,13 +13,15 @@
             @@include('_header.html')
 
             <main>
-                <div id="content">
-                    <img src="img/aleks.jpg" alt="my photo" />
+                <div class="layout">
+                    <div id="content">
+                        <p>Some text</p>
+                    </div>
+                    <div id="sidebar"></div>
+                    <aside></aside>
                 </div>
-                <div id="sidebar"></div>
-                <aside></aside>
             </main>
-            <footer></footer>
+            @@include('_footer.html')
         </div>
 
         <script type="text/javascript" src="js/script.min.js"></script>

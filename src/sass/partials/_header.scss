@@ -1,10 +1,16 @@
 header {
 	width:100%;
-	display:block;
+	display:flex;
 	position:relative;
+	background: #212529;
+	color: $font-color-light;
 }
 
-img {
-	background: url("img/aleks.jpg") 0 0 no-repeat;
-} 
+.logo  {
+	padding: 25px 0 25px 0;
+	h1 {
+		font-size: 25px;
+	}
+}
+
  
