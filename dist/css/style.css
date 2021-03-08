@@ -262,14 +262,31 @@ footer {
 main {
   display: block;
   width: 100%;
-  min-height: 90vh;
+  min-height: 88vh;
   position: relative;
   color: #212529;
 }
 
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
 #content {
+  width: 550px;
+  height: auto;
   position: relative;
   padding-bottom: 90px;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
 }
 
 #sidebar {
@@ -278,6 +295,16 @@ main {
 
 aside {
   position: relative;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  color: #e9e9f0;
+  background: #212529;
 }
 
 @font-face {
@@ -322,13 +349,19 @@ header {
   font-size: 25px;
 }
 
-footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  margin-top: -80px;
-  color: #e9e9f0;
-  background: #212529;
+footer p {
+  font-size: 15px;
+}
+
+.layout .lastResult {
+  color: white;
+  padding: 3px;
+}
+
+.layout .guessField {
+  margin: 0 auto;
+}
+
+.layout .content_description {
+  margin-bottom: 25px;
 }
