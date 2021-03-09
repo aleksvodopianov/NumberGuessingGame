@@ -11,6 +11,7 @@ let path = {
         js: projectFolder + '/js/',
         img: projectFolder + '/img/',
         fonts: projectFolder + '/fonts/',
+        webfonts: projectFolder + '/fonts/webfonts/'
     },
     src: {
         html: [sourceFolder + '/*.html', '!' + sourceFolder + '/_*.html'],
@@ -20,7 +21,8 @@ let path = {
         ],
         js: sourceFolder + '/js/script.js',
         img: sourceFolder + '/img/**/*.+(png|jpg|gif|ico|svg|webp) ',
-        fonts: sourceFolder + '/fonts/*.ttf',
+        fonts: sourceFolder + '/fonts/*.+(ttf|css|eot|svg)',
+        webfonts: sourceFolder + '/fonts/webfonts/*.+(ttf|eot|svg|woff|woff2)'
     },
     watch: {
         html: sourceFolder + '/**/*.html',
@@ -147,6 +149,12 @@ function fonts(params) {
         .pipe(dest(path.build.fonts));
 }
 
+function webfonts(params) {
+    src(path.src.webfonts)
+        .pipe(ttf2woff())
+        .pipe(dest(path.build.webfonts));
+}
+
 // Next task genereted otf-files to ttf-files on folder "src" on terminal command "gulp otf2ttf" ***********************************************************
 gulp.task('otf2ttf', function () {
     return src([sourceFolder = '/fonts/*.otf'])
@@ -213,9 +221,10 @@ function clean(params) {
     return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle);
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts, webfonts), fontsStyle);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.webfonts = webfonts;
 exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
