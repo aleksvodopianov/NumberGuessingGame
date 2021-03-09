@@ -16,7 +16,7 @@
 main {
 	display:block;
 	width:100%;
-	min-height: 86vh;
+	min-height: 88vh;
 	position: relative;
 	color: $font-color-dark;
 }
@@ -46,7 +46,10 @@ footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 80px;
+	height: 100px;
 	color: $font-color-light;
 	background: #212529;
+}
+.column {
+	flex-direction: column;
 }
