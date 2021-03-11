@@ -10,8 +10,9 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
+	padding: 0 25px;
 	position: relative;
-	width: 800px;
+	width: 650px;
 }
 main {
 	display:block;
@@ -27,12 +28,13 @@ main {
 	text-align: center;
 }
 #content{
-	width: 550px;
+	width: 650px;
 	height: auto;
 	position: relative;
-	padding-bottom: 90px;
-	margin-top: 20vh;
-	margin-bottom: 20vh;
+	// margin-top: 20vh;
+	// margin-bottom: 20vh;
+	margin: 20vh 25px;
+	padding: 0 25px 90px 25px;
 	text-align: center;
 }
 #sidebar {
@@ -53,3 +55,47 @@ footer {
 .column {
 	flex-direction: column;
 }
+
+@media screen and (max-width: 650px) {
+	.layout,
+	#content {
+		width: 320px;
+		padding: 0 10px;
+	}
+	main {
+		padding-bottom: 80px;
+	}
+}
+
+// @media screen and (min-width: 568px) and (max-width: 811px) {
+// 	.layout,
+// 	#content {
+// 		width: 568px;
+// 		padding: 0 10px;
+// 	}
+// }
+
+// @media screen and (min-width: 812px) and (max-width: 1279px) {
+// 	.layout,
+// 	#content {
+// 		width: 812px;
+// 		padding: 0 10px;
+// 	}
+// }
+
+// @media screen and (min-width: 1280px) and (max-width: 1599px) {
+// 	.layout,
+// 	#content {
+// 		width: 1280px;
+// 		padding: 0 10px;
+// 	}
+// }
+
+// @media screen and (min-width: 1600px) {
+// 	.layout,
+// 	#content {
+// 		width: 1600px;
+// 		padding: 0 10px;
+// 	}
+// }
+

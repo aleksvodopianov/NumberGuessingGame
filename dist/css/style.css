@@ -256,8 +256,9 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   margin: 0 auto;
+  padding: 0 25px;
   position: relative;
-  width: 800px;
+  width: 650px;
 }
 
 main {
@@ -282,12 +283,11 @@ main {
 }
 
 #content {
-  width: 550px;
+  width: 650px;
   height: auto;
   position: relative;
-  padding-bottom: 90px;
-  margin-top: 20vh;
-  margin-bottom: 20vh;
+  margin: 20vh 25px;
+  padding: 0 25px 90px 25px;
   text-align: center;
 }
 
@@ -383,4 +383,27 @@ footer i {
 
 .layout .guesses {
   margin-top: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .layout,
+  #content {
+    width: 320px;
+    padding: 0 10px;
+  }
+
+  main {
+    padding-bottom: 80px;
+  }
+
+  .form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .layout .guessField {
+    margin: 10px 0;
+  }
 }

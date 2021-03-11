@@ -14,3 +14,12 @@
         margin-top: 10px;
     }
 }
+
+@media screen and (max-width: 650px) {
+    .form {
+        flex-direction: column;
+    }
+    .layout .guessField {
+        margin: 10px 0;
+    }
+}
