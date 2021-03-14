@@ -362,6 +362,10 @@ footer .follow-me {
   margin-bottom: 10px;
 }
 
+footer .social_icons {
+  font-family: er;
+}
+
 footer i {
   font-size: 25px;
   margin: 0 10px;
