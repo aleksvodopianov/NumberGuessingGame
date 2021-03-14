@@ -156,13 +156,15 @@ function fonts(params) {
         .pipe(dest(path.build.fonts));
     return src(path.src.fonts)
         .pipe(ttf2woff2())
-        .pipe(dest(path.build.fonts));
+        .pipe(dest(path.build.fonts))
+        .pipe(browsersync.stream());
 }
 
 function webfonts(params) {
     src(path.src.webfonts)
         .pipe(ttf2woff())
-        .pipe(dest(path.build.webfonts));
+        .pipe(dest(path.build.webfonts))
+        .pipe(browsersync.stream());
 }
 
 function iconsfont(params) {
@@ -174,7 +176,8 @@ function iconsfont(params) {
                 extname: '.min.css',
             }),
         )
-        .pipe(dest(path.build.iconsfont));
+        .pipe(dest(path.build.iconsfont))
+        .pipe(browsersync.stream());
 }
 
 // Next task genereted otf-files to ttf-files on folder "src" on terminal command "gulp otf2ttf" ***********************************************************
