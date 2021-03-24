@@ -283,11 +283,15 @@ main {
 }
 
 #content {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  -webkit-box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   width: 650px;
   height: auto;
   position: relative;
-  margin: 20vh 25px;
-  padding: 0 25px 90px 25px;
+  margin: 20vh 25px 39vh;
   text-align: center;
 }
 
@@ -390,10 +394,15 @@ footer i {
 }
 
 @media screen and (max-width: 650px) {
-  .layout,
-  #content {
+  .layout {
     width: 320px;
     padding: 0 10px;
+  }
+
+  #content {
+    width: 320px;
+    padding: 25px 10px;
+    margin: 50px 25px 20vh;
   }
 
   main {
